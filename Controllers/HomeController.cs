@@ -28,31 +28,39 @@ namespace WebApplication3.Controllers
         public static List<Human> _humans = new List<Human>
         {
         };
-
+        public static List<ids> _ids= new List<ids>{
+        
+        };
 
         public HomeController(IUserService userService)
         {
             _userService = userService;
         }
 
-    
+
 
         [Authorize]
         [AutoValidateAntiforgeryToken]
         [HttpGet]
         public ObjectResult Index()
         {
-            var isAuth = HttpContext.User.Identity.IsAuthenticated.ToString();
+            //var isAuth = HttpContext.User.Identity.IsAuthenticated.ToString();
             // var token = HttpContext.User.Identity.AuthenticationTy
-            var getall = _userService.GetAll();
-
+            //var getall = _userService.GetAll();
             return new ObjectResult(_humans);
+            //return View();
         }
         [HttpGet]
         public JsonResult Godaddy()
         {
          
             return Json(_humans);
+        }
+        [HttpGet]
+        public ViewResult Do()
+        {
+
+            return View();
         }
 
         [HttpGet]
@@ -95,8 +103,10 @@ namespace WebApplication3.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
            
             employee.token = tokenHandler.WriteToken(token);
-            var employeex = new Human(employee.id, employee.name, employee.isAuth.ToString(), employee.token);
+            var employeex = new Human(employee.id, employee.name, "iptal", employee.token);
             _humans.Add(employeex);
+            var zaman = DateTime.Now;
+            _ids.Add(new ids(employee.id, zaman.ToString()));
             
            // _humans.Add(new Human(1,"asd","zxc","asdfr"));
             return RedirectToAction("Index","Home");

@@ -48,7 +48,7 @@ namespace WebApplication3.Services
 
             // remove password before returning
             //  user.Password = null;
-            _users.Add(new Human(1, "asd", "asass", "asasas"));
+            //_users.Add(new Human(1, "asd", "asass", "asasas"));
             return _users;
         }
 

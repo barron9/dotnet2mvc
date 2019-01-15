@@ -23,3 +23,5 @@ C:\Users\berkin.tatlisu\source\repos\WebApplication3\WebApplication3\obj\Debug\n
 C:\Users\berkin.tatlisu\source\repos\WebApplication3\WebApplication3\obj\Debug\netcoreapp2.1\WebApplication3.csproj.CopyComplete
 C:\Users\berkin.tatlisu\source\repos\WebApplication3\WebApplication3\obj\Debug\netcoreapp2.1\Razor\Views\Home\Denied.g.cshtml.cs
 C:\Users\berkin.tatlisu\source\repos\WebApplication3\WebApplication3\obj\Debug\netcoreapp2.1\Razor\Views\Home\userinfo.g.cshtml.cs
+C:\Users\berkin.tatlisu\source\repos\WebApplication3\WebApplication3\obj\Debug\netcoreapp2.1\Razor\Views\Home\Do.g.cshtml.cs
+C:\Users\berkin.tatlisu\source\repos\WebApplication3\WebApplication3\obj\Debug\netcoreapp2.1\Razor\Views\Home\index.g.cshtml.cs
