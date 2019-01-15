@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Godaddy";
+}
+
+<h2>login page</h2>
+
+<p>giriş yapınız</p>
+
+<form action="/api/register">
+    İsim:<br>
+    <input type="text" name="name" value="" placeholder="isim...">
+    <br>
+    id:<br>
+    <input type="text" name="id" value="" placeholder="id...">
+    <br><br>
+    <input type="submit" value="giriş">
+</form>
+
+
+
+<br />
+@Model.name
+

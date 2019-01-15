@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Do";
+}
+
+<h2>Do</h2>
+<h2>login page</h2>
+
+<p>giriş yapınız</p>
+
+<form action="/api/register" enctype="application/x-www-form-urlencoded">
+    İsim:<br>
+    <input type="text" name="name" value="" placeholder="isim...">
+    <br>
+    id:<br>
+    <input type="text" name="id" value="" placeholder="id...">
+
+    <input hidden type="text" name="token" value="1">
+
+    <input hidden type="text" name="isAuth" value="2">
+    <br><br>
+    <input type="submit" value="giriş">
+    <br />
+
+
+</form>
+
+
+
