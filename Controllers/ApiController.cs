@@ -114,7 +114,7 @@ namespace WebApplication3.Controllers
             var token2 = tokenHandler.WriteToken(token1);
             var zaman = DateTime.UtcNow.AddMinutes(30);
 
-            var employeex = new Human(0, userheader, zaman.ToString(), "Authorization: Bearer " + token2);
+            var employeex = new Human(0, userheader, zaman.ToString(),  token2);
 
             return Json((employeex));
             }
