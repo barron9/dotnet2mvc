@@ -66,18 +66,20 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public async Task<JsonResult> login()
         {
-
-            // var authheader= Request.Headers["Authorization"];
-            var userheader = Request.Headers["Username"];
-            var passheader = Request.Headers["Password"];
-            var grantheader = Request.Headers["grant_type"];
-            if (string.IsNullOrEmpty(userheader) || string.IsNullOrEmpty(passheader) || string.IsNullOrEmpty(grantheader)
-                //  || string.IsNullOrEmpty(authheader)
-                )
+            try
             {
-                throw new Exception("AUTH NOT SET");
-                //return null;
-            }
+                // var authheader= Request.Headers["Authorization"];
+                var userheader = Request.Headers["Username"];
+                var passheader = Request.Headers["Password"];
+                var grantheader = Request.Headers["grant_type"];
+                if (string.IsNullOrEmpty(userheader) || string.IsNullOrEmpty(passheader) || string.IsNullOrEmpty(grantheader) || grantheader != "password"
+                    //  || string.IsNullOrEmpty(authheader)
+                    )
+                {
+                    throw new Exception("AUTH NOT SET");
+                   // return null;
+                }
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,userheader),
@@ -115,7 +117,12 @@ namespace WebApplication3.Controllers
             var employeex = new Human(0, userheader, zaman.ToString(), "Authorization: Bearer " + token2);
 
             return Json((employeex));
-
+            }
+            catch (Exception e)
+            {
+                throw new Exception("exception");
+                
+            }
             // return RedirectToAction("Index", "Home");
         }
 
