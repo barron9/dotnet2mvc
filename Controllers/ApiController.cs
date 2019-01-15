@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -65,18 +66,24 @@ namespace WebApplication3.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<JsonResult> register()
-        {
 
-           var authheader= Request.Headers["Authorization"];
+        [HttpGet]
+        public async Task<JsonResult> login()
+        {
+            
+          // var authheader= Request.Headers["Authorization"];
             var userheader = Request.Headers["Username"];
             var passheader = Request.Headers["Password"];
             var grantheader = Request.Headers["grant_type"];
-
+            if (string.IsNullOrEmpty(userheader) || string.IsNullOrEmpty(passheader) || string.IsNullOrEmpty(grantheader )
+              //  || string.IsNullOrEmpty(authheader)
+                ) {
+                throw new Exception("AUTH NOT SET");
+                //return null;
+            }
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name,authheader),
+              //  new Claim(ClaimTypes.Name,authheader),
                 new Claim(ClaimTypes.Name,userheader),
                 new Claim(ClaimTypes.NameIdentifier,grantheader),
 
@@ -119,8 +126,7 @@ namespace WebApplication3.Controllers
             // return RedirectToAction("Index", "Home");
         }
 
-    
-
+     
         [HttpGet]
         [Authorize]
         public IActionResult userinfo()
