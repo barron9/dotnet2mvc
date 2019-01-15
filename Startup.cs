@@ -51,7 +51,7 @@ namespace WebApplication3
             app.Run(async (context) =>
             {
                // throw new Exception("nothing found");
-               await context.Response.WriteAsync("");
+               await context.Response.WriteAsync("nothing returns");
             });
 
 
@@ -60,8 +60,8 @@ namespace WebApplication3
 
         private void ConfigureRoute(IRouteBuilder routeBuilder)
         {
-            //Home/Index 
-            routeBuilder.MapRoute("Default", "{controller = Home}/{action = Index}/{id?}");
+            //Api/Index 
+            routeBuilder.MapRoute("Default", "{controller = Api}/{action = Index}/{id?}");
         }
     }
 }
