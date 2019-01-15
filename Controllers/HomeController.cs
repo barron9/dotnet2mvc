@@ -25,9 +25,8 @@ namespace WebApplication3.Controllers
         private IUserService _userService;
 
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        public List<Human> _humans = new List<Human>
+        public static List<Human> _humans = new List<Human>
         {
-            new Human ( 1,"test","false","asd" )
         };
 
 
@@ -46,20 +45,13 @@ namespace WebApplication3.Controllers
             var isAuth = HttpContext.User.Identity.IsAuthenticated.ToString();
             // var token = HttpContext.User.Identity.AuthenticationTy
             var getall = _userService.GetAll();
-            _humans.Add(new Human(1, "asd", "zxc", "asdfr"));
 
             return new ObjectResult(_humans);
         }
         [HttpGet]
         public JsonResult Godaddy()
         {
-            List<Human> _humans = new List<Human>
-        {
-            new Human ( 1,"test","false","asd" )
-        };
-            _humans.Add(new Human(1, "test", "false", "asd"));
-            
-
+         
             return Json(_humans);
         }
 
@@ -82,7 +74,7 @@ namespace WebApplication3.Controllers
             await HttpContext.SignInAsync(principles);
             var user = _userService.Authenticate(employee);
 
-            /*
+           
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -103,10 +95,10 @@ namespace WebApplication3.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
            
             employee.token = tokenHandler.WriteToken(token);
-            var employeex = new Human(22, "ASDDD", "AAS", employee.token);
+            var employeex = new Human(employee.id, employee.name, employee.isAuth.ToString(), employee.token);
             _humans.Add(employeex);
-            */
-            _humans.Add(new Human(1,"asd","zxc","asdfr"));
+            
+           // _humans.Add(new Human(1,"asd","zxc","asdfr"));
             return RedirectToAction("Index","Home");
           // return (employee.token);
         }
