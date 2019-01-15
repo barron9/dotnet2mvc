@@ -19,7 +19,7 @@ namespace WebApplication3.Services
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
         public List<Human> _users = new List<Human>
         {
-            new Human  (22, "ASDDD", "AAS", "none")
+       //     new Human  (22, "ASDDD", "AAS", "none")
     };
 
 

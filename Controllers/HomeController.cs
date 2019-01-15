@@ -30,6 +30,7 @@ namespace WebApplication3.Controllers
             new Human ( 1,"test","false","asd" )
         };
 
+
         public HomeController(IUserService userService)
         {
             _userService = userService;
@@ -45,15 +46,21 @@ namespace WebApplication3.Controllers
             var isAuth = HttpContext.User.Identity.IsAuthenticated.ToString();
             // var token = HttpContext.User.Identity.AuthenticationTy
             var getall = _userService.GetAll();
-           
-            return new ObjectResult(getall);
+            _humans.Add(new Human(1, "asd", "zxc", "asdfr"));
+
+            return new ObjectResult(_humans);
         }
         [HttpGet]
-        public ViewResult Godaddy()
+        public JsonResult Godaddy()
         {
-            var employee = new Human ( 2,"godaddy test","false", "null" );
+            List<Human> _humans = new List<Human>
+        {
+            new Human ( 1,"test","false","asd" )
+        };
+            _humans.Add(new Human(1, "test", "false", "asd"));
+            
 
-            return View(employee);
+            return Json(_humans);
         }
 
         [HttpGet]
@@ -99,7 +106,7 @@ namespace WebApplication3.Controllers
             var employeex = new Human(22, "ASDDD", "AAS", employee.token);
             _humans.Add(employeex);
             */
-
+            _humans.Add(new Human(1,"asd","zxc","asdfr"));
             return RedirectToAction("Index","Home");
           // return (employee.token);
         }
