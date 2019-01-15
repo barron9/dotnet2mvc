@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace WebApplication3
 {
@@ -17,6 +18,10 @@ namespace WebApplication3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options=> {
+                options.LoginPath = "/home/godaddy";
+                options.AccessDeniedPath = "/home/denied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,7 +34,7 @@ namespace WebApplication3
             //app.UseDefaultFiles();
             //app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
+            app.UseAuthentication();
             app.Run(async (context) =>
             {
                 throw new Exception("nothing found");

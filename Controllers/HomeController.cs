@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using WebApplication3.Models;
 
@@ -12,15 +9,28 @@ namespace WebApplication3.Controllers
     {
         public ObjectResult Index()
         {
-            var employee = new Human { id = 1, name = "Mark Upston" };
+            var employee = new Human { id = 1, name = "test 333" };
             return new ObjectResult(employee);
-            //return "home controller";
         }
-
-        public ViewResult Godaddy() {
+        [HttpGet]
+        public ViewResult Godaddy()
+        {
             var employee = new Human { id = 1, name = "Mark Upston" };
 
             return View(employee);
+        }
+
+        [HttpGet]
+        public JsonResult register( Human employee)
+        {
+
+            return Json(employee);
+        }
+
+        public ViewResult Denied()
+        {
+
+            return View();
         }
     }
 }
