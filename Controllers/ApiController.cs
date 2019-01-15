@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -45,13 +44,10 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public ObjectResult Index()
         {
-            //var isAuth = HttpContext.User.Identity.IsAuthenticated.ToString();
-            // var token = HttpContext.User.Identity.AuthenticationTy
-            //var getall = _userService.GetAll();
+
             var name = HttpContext.Session.GetString("auth");
 
-            return (new ObjectResult(_humans) );
-            //return View();
+            return (new ObjectResult(_humans));
         }
         [HttpGet]
         public JsonResult Godaddy()
@@ -70,20 +66,20 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public async Task<JsonResult> login()
         {
-            
-          // var authheader= Request.Headers["Authorization"];
+
+            // var authheader= Request.Headers["Authorization"];
             var userheader = Request.Headers["Username"];
             var passheader = Request.Headers["Password"];
             var grantheader = Request.Headers["grant_type"];
-            if (string.IsNullOrEmpty(userheader) || string.IsNullOrEmpty(passheader) || string.IsNullOrEmpty(grantheader )
-              //  || string.IsNullOrEmpty(authheader)
-                ) {
+            if (string.IsNullOrEmpty(userheader) || string.IsNullOrEmpty(passheader) || string.IsNullOrEmpty(grantheader)
+                //  || string.IsNullOrEmpty(authheader)
+                )
+            {
                 throw new Exception("AUTH NOT SET");
                 //return null;
             }
             var claims = new List<Claim>
             {
-              //  new Claim(ClaimTypes.Name,authheader),
                 new Claim(ClaimTypes.Name,userheader),
                 new Claim(ClaimTypes.NameIdentifier,grantheader),
 
@@ -93,7 +89,6 @@ namespace WebApplication3.Controllers
             var principles = new ClaimsPrincipal(identity);
 
             await HttpContext.SignInAsync(principles);
-            //var user = _userService.Authenticate(employee);
 
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -114,19 +109,17 @@ namespace WebApplication3.Controllers
             };
             var token1 = tokenHandler.CreateToken(tokenDescriptor);
 
-             var token2 = tokenHandler.WriteToken(token1);
+            var token2 = tokenHandler.WriteToken(token1);
             var zaman = DateTime.UtcNow.AddMinutes(30);
 
-            var employeex = new Human(0, userheader,zaman.ToString(), "Authorization: Bearer "+ token2);
-           // _humans.Add(employeex);
-          //  _ids.Add(new ids(employee.id, zaman.ToString()));
-            //HttpContext.Session.SetString("auth", token);
+            var employeex = new Human(0, userheader, zaman.ToString(), "Authorization: Bearer " + token2);
+
             return Json((employeex));
-            
+
             // return RedirectToAction("Index", "Home");
         }
 
-     
+
         [HttpGet]
         [Authorize]
         public IActionResult userinfo()
