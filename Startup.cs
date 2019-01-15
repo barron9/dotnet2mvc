@@ -18,8 +18,16 @@ namespace WebApplication3
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         { services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options=> {
-                options.LoginPath = "/home/do";
-                options.AccessDeniedPath = "/home/denied";
+                options.LoginPath = "/api/do";
+                options.AccessDeniedPath = "/api/denied";
+            });
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
             });
             services.AddMvc();
             services.AddScoped<IUserService, UserService>();
@@ -33,6 +41,7 @@ namespace WebApplication3
          
              app.UseDeveloperExceptionPage();
             app.UseAuthentication();
+            app.UseSession();
 
             app.UseMvc(ConfigureRoute);
             // app.UseWelcomePage();
@@ -41,8 +50,8 @@ namespace WebApplication3
             app.UseMvcWithDefaultRoute();
             app.Run(async (context) =>
             {
-                throw new Exception("nothing found");
-               await context.Response.WriteAsync("Hello World!...testing...");
+               // throw new Exception("nothing found");
+               await context.Response.WriteAsync("");
             });
 
 
