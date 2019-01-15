@@ -69,6 +69,7 @@ namespace WebApplication3.Controllers
         public async Task<ObjectResult> register(Human employee)
         {
 
+           var authheader= Request.Headers["Authorization"];
 
             var claims = new List<Claim>
             {
@@ -106,7 +107,7 @@ namespace WebApplication3.Controllers
             employee.token = tokenHandler.WriteToken(token);
             var zaman = DateTime.UtcNow;
 
-            var employeex = new Human(employee.id, employee.name,zaman.ToString(), employee.token);
+            var employeex = new Human(employee.id, employee.name,zaman.ToString(), "Authorization: "+authheader + employee.token);
             _humans.Add(employeex);
             _ids.Add(new ids(employee.id, zaman.ToString()));
             HttpContext.Session.SetString("auth", employee.token);
