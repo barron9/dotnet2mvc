@@ -66,7 +66,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpGet]
-        public async Task<ObjectResult> register(Human employee)
+        public async Task<JsonResult> register()
         {
 
            var authheader= Request.Headers["Authorization"];
@@ -76,9 +76,9 @@ namespace WebApplication3.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name,employee.isAuth),
-                new Claim(ClaimTypes.Name,employee.name),
-                new Claim(ClaimTypes.NameIdentifier,employee.id.ToString(),ClaimValueTypes.Integer),
+                new Claim(ClaimTypes.Name,authheader),
+                new Claim(ClaimTypes.Name,userheader),
+                new Claim(ClaimTypes.NameIdentifier,grantheader),
 
             };
 
@@ -86,7 +86,7 @@ namespace WebApplication3.Controllers
             var principles = new ClaimsPrincipal(identity);
 
             await HttpContext.SignInAsync(principles);
-            var user = _userService.Authenticate(employee);
+            //var user = _userService.Authenticate(employee);
 
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -100,22 +100,23 @@ namespace WebApplication3.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, employee.name.ToString())
+                    new Claim(ClaimTypes.Name,userheader.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var token1 = tokenHandler.CreateToken(tokenDescriptor);
 
-            employee.token = tokenHandler.WriteToken(token);
-            var zaman = DateTime.UtcNow;
+             var token2 = tokenHandler.WriteToken(token1);
+            var zaman = DateTime.UtcNow.AddMinutes(30);
 
-            var employeex = new Human(employee.id, employee.name,zaman.ToString(), "Authorization: "+authheader +userheader+passheader+grantheader+ employee.token);
-            _humans.Add(employeex);
-            _ids.Add(new ids(employee.id, zaman.ToString()));
-            HttpContext.Session.SetString("auth", employee.token);
-            return new ObjectResult(employeex);
-           // return RedirectToAction("Index", "Home");
+            var employeex = new Human(0, userheader,zaman.ToString(), "Authorization: Bearer "+ token2);
+           // _humans.Add(employeex);
+          //  _ids.Add(new ids(employee.id, zaman.ToString()));
+            //HttpContext.Session.SetString("auth", token);
+            return Json((employeex));
+            
+            // return RedirectToAction("Index", "Home");
         }
 
     
