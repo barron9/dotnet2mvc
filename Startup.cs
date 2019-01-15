@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using WebApplication3.Services;
 
 namespace WebApplication3
 {
@@ -21,7 +22,9 @@ namespace WebApplication3
                 options.AccessDeniedPath = "/home/denied";
             });
             services.AddMvc();
-           
+            services.AddScoped<IUserService, UserService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

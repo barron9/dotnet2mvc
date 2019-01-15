@@ -2,31 +2,29 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using WebApplication3.Models;
 
 namespace WebApplication3.Services
 {
     public interface IUserService
     {
-        Human Authenticate(Human employee);
+        List<Human>  Authenticate(Human employee);
         IEnumerable<Human> GetAll();
     }
 
     public class UserService : IUserService
     {
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        private List<Human> _users = new List<Human>
+        public List<Human> _users = new List<Human>
         {
             new Human  (22, "ASDDD", "AAS", "none")
     };
 
 
 
-        public Human Authenticate(Human user)
+        public List<Human>  Authenticate(Human user)
         {
 
             // return null if user not found
@@ -49,17 +47,15 @@ namespace WebApplication3.Services
             user.token = tokenHandler.WriteToken(token);
 
             // remove password before returning
-          //  user.Password = null;
-
-            return user;
+            //  user.Password = null;
+            _users.Add(new Human(1, "asd", "asass", "asasas"));
+            return _users;
         }
 
         public IEnumerable<Human> GetAll()
         {
             // return users without passwords
-            return _users.Select(x => {
-                return x;
-            });
+            return _users;
         }
 
      

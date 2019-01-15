@@ -7,7 +7,7 @@ namespace WebApplication3.Models
 {
     public class Human
     {
-        public Human(int id) { }
+        public Human() { }
         public Human(int id, string name, string isAuth, string token)
         {
             this.id = id;

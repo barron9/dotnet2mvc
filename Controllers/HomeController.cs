@@ -35,6 +35,7 @@ namespace WebApplication3.Controllers
             _userService = userService;
         }
 
+    
 
         [Authorize]
         [AutoValidateAntiforgeryToken]
@@ -58,10 +59,7 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public async Task<IActionResult> register( Human employee)
         {
-            _humans.Add(new Human(22, "ASDDD", "AAS", employee.token));
-            _humans.Add(new Human(22, "ASDDD", "AAS", employee.token));
-            _humans.Add(new Human(22, "ASDDD", "AAS", employee.token));
-            _humans.Add(new Human(22, "ASDDD", "AAS", employee.token));
+          
 
             var claims = new List<Claim>
             {
