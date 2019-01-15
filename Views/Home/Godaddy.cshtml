@@ -3,9 +3,22 @@
     ViewData["Title"] = "Godaddy";
 }
 
-<h2>Godaddy login page</h2>
+<h2>login page</h2>
 
-<input type="submit" />
+<p>giriş yapınız</p>
 
+<form action="/home/register">
+    İsim:<br>
+    <input type="text" name="name" value="" placeholder="isim...">
+    <br>
+    id:<br>
+    <input type="text" name="id" value="" placeholder="id...">
+    <br><br>
+    <input type="submit" value="giriş">
+</form>
+
+
+
+<br />
 @Model.name
 

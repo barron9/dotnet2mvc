@@ -9,5 +9,7 @@ namespace WebApplication3.Models
     {
         public int id { get; set; }
         public String name { get; set; }
+        public String isAuth { get; set; }
+
     }
 }
