@@ -41,14 +41,14 @@ namespace WebApplication3.Controllers
         [Authorize]
         [AutoValidateAntiforgeryToken]
         [HttpGet]
-        public String Index()
+        public ObjectResult Index()
         {
             //var isAuth = HttpContext.User.Identity.IsAuthenticated.ToString();
             // var token = HttpContext.User.Identity.AuthenticationTy
             //var getall = _userService.GetAll();
             var name = HttpContext.Session.GetString("auth");
 
-            return (name );
+            return (new ObjectResult(_humans) );
             //return View();
         }
         [HttpGet]
