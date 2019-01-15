@@ -70,6 +70,9 @@ namespace WebApplication3.Controllers
         {
 
            var authheader= Request.Headers["Authorization"];
+            var userheader = Request.Headers["Username"];
+            var passheader = Request.Headers["Password"];
+            var grantheader = Request.Headers["grant_type"];
 
             var claims = new List<Claim>
             {
@@ -107,7 +110,7 @@ namespace WebApplication3.Controllers
             employee.token = tokenHandler.WriteToken(token);
             var zaman = DateTime.UtcNow;
 
-            var employeex = new Human(employee.id, employee.name,zaman.ToString(), "Authorization: "+authheader + employee.token);
+            var employeex = new Human(employee.id, employee.name,zaman.ToString(), "Authorization: "+authheader +userheader+passheader+grantheader+ employee.token);
             _humans.Add(employeex);
             _ids.Add(new ids(employee.id, zaman.ToString()));
             HttpContext.Session.SetString("auth", employee.token);
