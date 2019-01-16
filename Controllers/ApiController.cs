@@ -65,7 +65,7 @@ namespace WebApplication3.Controllers
 
 
         [HttpPost]
-        public async Task<JsonResult> login(String username, String password)
+        public async Task<IActionResult> login(String username, String password)
         {
 
             try
@@ -127,7 +127,8 @@ namespace WebApplication3.Controllers
                                .Count();
                 if (varmi < 1)
                 {
-                    return Json(new { result = "check your login", status = "error" });
+                    //return Json(new { result = "check your login", status = "error" });
+                    return RedirectToAction("Denied","Api");
 
                 }
                 else if (varmi == 1)
@@ -182,6 +183,7 @@ namespace WebApplication3.Controllers
             // return RedirectToAction("Index", "Home");
         }
 
+       
 
         [HttpGet]
         [Authorize]
