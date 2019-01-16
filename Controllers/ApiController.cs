@@ -19,7 +19,8 @@ namespace WebApplication3.Controllers
 {
 
     public class ApiController : Controller
-    {
+    {        private readonly HumanDBContext _db;
+
 
         private IUserService _userService;
 
@@ -27,13 +28,11 @@ namespace WebApplication3.Controllers
         public static List<Human> _humans = new List<Human>
         {
         };
-        public static List<ids> _ids = new List<ids>
-        {
+     
 
-        };
-
-        public ApiController(IUserService userService)
+        public ApiController(IUserService userService,HumanDBContext db)
         {
+            _db = db;
             _userService = userService;
         }
 
@@ -44,15 +43,18 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public ObjectResult Index()
         {
-
             var name = HttpContext.Session.GetString("auth");
-
             return (new ObjectResult(_humans));
         }
         [HttpGet]
         public JsonResult Godaddy()
         {
-
+            
+            foreach (var Human in _db.Human)
+            {
+                //Console.WriteLine(Human.token);
+                _humans.Add(Human);
+            }
             return Json(_humans);
         }
         [HttpGet]
@@ -66,6 +68,7 @@ namespace WebApplication3.Controllers
         [HttpGet]
         public async Task<JsonResult> login()
         {
+
             try
             {
                 // var authheader= Request.Headers["Authorization"];
@@ -106,16 +109,19 @@ namespace WebApplication3.Controllers
                 {
                     new Claim(ClaimTypes.Name,userheader.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
             var token1 = tokenHandler.CreateToken(tokenDescriptor);
 
             var token2 = tokenHandler.WriteToken(token1);
-            var zaman = DateTime.UtcNow.AddMinutes(30);
+           // var zaman = DateTime.UtcNow.AddMinutes(30);
+             var  zaman= DateTimeOffset.UtcNow.AddMinutes(30).ToUnixTimeSeconds();
 
             var employeex = new Human(0, userheader, zaman.ToString(),  token2);
-
+                //_humanContext.Add(employeex);
+                _db.Add(employeex);
+                _db.SaveChanges();
             return Json((employeex));
             }
             catch (Exception e)

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using WebApplication3.Services;
+using WebApplication3.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication3
 {
@@ -29,9 +31,10 @@ namespace WebApplication3
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
             });
+            services.AddDbContext<HumanDBContext>(options => options.UseSqlServer(@"Data Source=(local);Initial Catalog=WebApplication3;Integrated Security=True",b=>b.UseRowNumberForPaging()));
             services.AddMvc();
             services.AddScoped<IUserService, UserService>();
-
+         
 
         }
 
@@ -51,7 +54,7 @@ namespace WebApplication3
             app.Run(async (context) =>
             {
                // throw new Exception("nothing found");
-               await context.Response.WriteAsync("nothing returns");
+               await context.Response.WriteAsync("!");
             });
 
 
