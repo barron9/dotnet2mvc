@@ -17,28 +17,30 @@
 
 </head>
 <body>
-
-    <h2>Do</h2>
-
-    <p>giriş yapınız</p>
-
-    <form action="/api/login" method="post" enctype="application/x-www-form-urlencoded">
-        İsim:<br>
-        <input type="text" name="username" value="" placeholder="isim...">
-        <br>
-        şifre:<br>
-        <input type="password" name="password" value="" placeholder="şifre">
-
-        <input hidden type="text" name="token" value="1">
-
-        <input hidden type="text" name="isAuth" value="2">
-        <br><br>
-        <input type="submit" value="giriş">
-        <br />
+    <div style=" margin: auto;
+  width: 50%;
+  border: 3px solid #eaeaea;
+  padding: 10px;color:#888;background:#eaeaea">
+        <div>
+        <div style="text-align:center"><h2>Panel</h2></div>
 
 
-    </form>
+        <form action="/api/login" method="post" enctype="application/x-www-form-urlencoded">
+            <label for="exampleInputEmail1">Kullanıcı adı</label>
+            <input type="text" class="form-control" name="username" id="exampleInputEmail1" placeholder="kullanıcı">
+            <label for="passinput">Şifre</label>
 
+            <input type="text" class="form-control" name="password" id="passinput" placeholder="şifre">
+
+
+         <div style="height:10px"></div>
+            <button type="submit" class="btn btn-primary" style="width:200px" >giriş</button>
+
+            <br />
+
+        </form>
+            </div>
+    </div>
 </body>
 </html>
 
