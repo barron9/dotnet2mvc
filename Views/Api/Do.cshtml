@@ -3,27 +3,45 @@
     ViewData["Title"] = "Do";
 }
 
-<h2>Do</h2>
-<h2>login page</h2>
+<html>
 
-<p>giriş yapınız</p>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha384-PmY9l28YgO4JwMKbTvgaS7XNZJ30MK9FAZjjzXtlqyZCqBY6X6bXIkM++IkyinN+" crossorigin="anonymous">
 
-<form action="/api/register" enctype="application/x-www-form-urlencoded">
-    İsim:<br>
-    <input type="text" name="name" value="" placeholder="isim...">
-    <br>
-    id:<br>
-    <input type="text" name="id" value="" placeholder="id...">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css" integrity="sha384-jzngWsPS6op3fgRCDTESqrEJwRKck+CILhJVO5VvaAZCq8JYf8HsR/HPpBOOPZfR" crossorigin="anonymous">
 
-    <input hidden type="text" name="token" value="1">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw" crossorigin="anonymous"></script>
 
-    <input hidden type="text" name="isAuth" value="2">
-    <br><br>
-    <input type="submit" value="giriş">
-    <br />
+</head>
+<body>
+
+    <h2>Do</h2>
+
+    <p>giriş yapınız</p>
+
+    <form action="/api/login" method="post" enctype="application/x-www-form-urlencoded">
+        İsim:<br>
+        <input type="text" name="username" value="" placeholder="isim...">
+        <br>
+        şifre:<br>
+        <input type="password" name="password" value="" placeholder="şifre">
+
+        <input hidden type="text" name="token" value="1">
+
+        <input hidden type="text" name="isAuth" value="2">
+        <br><br>
+        <input type="submit" value="giriş">
+        <br />
 
 
-</form>
+    </form>
+
+</body>
+</html>
+
 
 
 

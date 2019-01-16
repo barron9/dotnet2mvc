@@ -64,7 +64,8 @@ namespace WebApplication3
         private void ConfigureRoute(IRouteBuilder routeBuilder)
         {
             //Api/Index 
-            routeBuilder.MapRoute("Default", "{controller = Api}/{action = Index}/{id?}");
+            //routeBuilder.MapRoute("Default", "/api/do");
+            routeBuilder.MapRoute("Default", "{controller=api}/{action=do}/{id?}");
         }
     }
 }

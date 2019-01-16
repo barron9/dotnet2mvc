@@ -125,10 +125,13 @@ namespace WebApplication3.Controllers
                 //var varmi = _db.Human.FirstOrDefault(b => b.name == username && b.password == password);
                 var varmi = _db.Human.Where(b => b.name == username && b.password == password)
                                .Count();
-                if (varmi < 1) {
+                if (varmi < 1)
+                {
                     return Json(new { result = "check your login", status = "error" });
 
-                } else if (varmi == 1) {
+                }
+                else if (varmi == 1)
+                {
 
                     var result = _db.Human.SingleOrDefault(b => b.name == username && b.password == password);
                     result.token = token2;
@@ -137,7 +140,7 @@ namespace WebApplication3.Controllers
                     return Json(new { expire = zaman.ToString(), token = token2 });
 
                 }
-                else 
+                else
                 {
                     _db.Add(employeex);
                     _db.SaveChanges();
@@ -145,9 +148,9 @@ namespace WebApplication3.Controllers
 
                 }
 
-                
 
-              
+
+
                 /*
                 if (varmi < 1)
                 {
