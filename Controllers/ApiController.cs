@@ -130,11 +130,12 @@ namespace WebApplication3.Controllers
                 {
                     _db.Add(employeex);
                     _db.SaveChanges();
-                    return Json((employeex));
+                    // return Json((employeex));
+                    return Json(new {expire=zaman.ToString(), token = token2 });
 
                 }
                 else {
-                    return Json("token isset, redirect to api with token header");
+                    return Json(new { result="ok" });
                 }
             }
             catch (Exception e)
