@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -65,13 +66,14 @@ namespace WebApplication3.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<JsonResult> login()
+        [HttpPost]
+        public async Task<JsonResult> login( String username)
         {
 
             try
             {
                 // var authheader= Request.Headers["Authorization"];
+                /*
                 var userheader = Request.Headers["Username"];
                 var passheader = Request.Headers["Password"];
                 var grantheader = Request.Headers["grant_type"];
@@ -82,7 +84,8 @@ namespace WebApplication3.Controllers
                     throw new Exception("AUTH NOT SET");
                    // return null;
                 }
-
+                */
+                /*
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name,userheader),
@@ -95,7 +98,7 @@ namespace WebApplication3.Controllers
 
             await HttpContext.SignInAsync(principles);
 
-
+    */
             var tokenHandler = new JwtSecurityTokenHandler();
 
             TripleDESCryptoServiceProvider TDES = new TripleDESCryptoServiceProvider();
@@ -107,7 +110,7 @@ namespace WebApplication3.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name,userheader.ToString())
+                    new Claim(ClaimTypes.Name,username.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
@@ -118,15 +121,25 @@ namespace WebApplication3.Controllers
            // var zaman = DateTime.UtcNow.AddMinutes(30);
              var  zaman= DateTimeOffset.UtcNow.AddMinutes(30).ToUnixTimeSeconds();
 
-            var employeex = new Human(0, userheader, zaman.ToString(),  token2);
+            var employeex = new Human(0, username ,zaman.ToString(),  token2);
                 //_humanContext.Add(employeex);
-                _db.Add(employeex);
-                _db.SaveChanges();
-            return Json((employeex));
+
+                var varmi = _db.Human.Where(b => b.name == username)
+                                  .Count();
+                if (varmi < 1)
+                {
+                    _db.Add(employeex);
+                    _db.SaveChanges();
+                    return Json((employeex));
+
+                }
+                else {
+                    return Json("token isset, redirect to api with token header");
+                }
             }
             catch (Exception e)
             {
-                throw new Exception("exception");
+                throw new Exception(e.ToString());
                 
             }
             // return RedirectToAction("Index", "Home");
