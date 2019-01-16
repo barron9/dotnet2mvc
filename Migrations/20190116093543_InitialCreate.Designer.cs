@@ -9,7 +9,7 @@ using WebApplication3.Models;
 namespace WebApplication3.Migrations
 {
     [DbContext(typeof(HumanDBContext))]
-    [Migration("20190116092723_InitialCreate")]
+    [Migration("20190116093543_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,8 @@ namespace WebApplication3.Migrations
                     b.Property<string>("expires");
 
                     b.Property<string>("name");
+
+                    b.Property<string>("password");
 
                     b.Property<string>("token");
 

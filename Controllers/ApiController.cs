@@ -121,7 +121,7 @@ namespace WebApplication3.Controllers
            // var zaman = DateTime.UtcNow.AddMinutes(30);
              var  zaman= DateTimeOffset.UtcNow.AddMinutes(30).ToUnixTimeSeconds();
 
-            var employeex = new Human(0, username ,zaman.ToString(),  token2);
+            var employeex = new Human(0, username ,"",zaman.ToString(),  token2);
                 //_humanContext.Add(employeex);
 
                 var varmi = _db.Human.Where(b => b.name == username)

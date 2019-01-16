@@ -14,6 +14,7 @@ namespace WebApplication3.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     name = table.Column<string>(nullable: true),
+                    password = table.Column<string>(nullable: true),
                     expires = table.Column<string>(nullable: true),
                     token = table.Column<string>(nullable: true)
                 },

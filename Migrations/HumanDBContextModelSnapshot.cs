@@ -28,6 +28,8 @@ namespace WebApplication3.Migrations
 
                     b.Property<string>("name");
 
+                    b.Property<string>("password");
+
                     b.Property<string>("token");
 
                     b.HasKey("id");
