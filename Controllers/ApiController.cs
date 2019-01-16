@@ -128,14 +128,16 @@ namespace WebApplication3.Controllers
                                   .Count();
                 if (varmi < 1)
                 {
-                    _db.Add(employeex);
-                    _db.SaveChanges();
-                    // return Json((employeex));
-                    return Json(new {expire=zaman.ToString(), token = token2 });
+                  
+                    return Json(new { result = "check your login", status = "error" });
 
                 }
                 else {
-                    return Json(new { result="ok" });
+
+                    _db.Add(employeex);
+                    _db.SaveChanges();
+                    // return Json((employeex));
+                    return Json(new { expire = zaman.ToString(), token = token2 });
                 }
             }
             catch (Exception e)
